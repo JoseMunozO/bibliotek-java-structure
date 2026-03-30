@@ -1,0 +1,4 @@
+package se.josecarlos.bibliotek.presentation;
+
+public class BookMenu {
+}
