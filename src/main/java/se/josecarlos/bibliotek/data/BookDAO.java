@@ -82,4 +82,40 @@ public class BookDAO {
                 rs.getInt("available_copies")
         );
     }
+
+    public void decreaseAvailableCopies(int bookId) {
+        String sql = """
+                UPDATE books
+                SET available_copies = available_copies - 1
+                WHERE id = ? AND available_copies > 0
+                """;
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, bookId);
+            stmt.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void increaseAvailableCopies(int bookId) {
+        String sql = """
+                UPDATE books
+                SET available_copies = available_copies + 1
+                WHERE id = ?
+                """;
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, bookId);
+            stmt.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
