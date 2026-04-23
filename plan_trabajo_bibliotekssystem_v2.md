@@ -156,38 +156,23 @@ solo funcional
 ## 🟠 Bloque 5 (3–5 días)
 ### EXTRAS (solo si todo funciona)
 
-Implementado:
+Elegir algunos:
 - reviews
+- categories
+- authors
 - notificaciones
-- estadisticas de libros mas prestados
-- perfil de miembro
-- actualizacion de miembro
-- suspension de miembros
-- extension de prestamos
-- detalles ampliados de libros
-- registro enriquecido de prestamos vencidos
 
-✅ Resultado:
-Sistema mas completo y mas profesional, apoyado en el esquema real de MySQL
+❗ No hacer todos
 
 ---
 
 ## 🔴 Bloque final (2–3 días)
 ### LIMPIEZA + PRESENTACIÓN
 
-Implementado:
-- limpieza de configuracion y artefactos locales
-- soporte para variables de entorno
-- documentacion de ejecucion
-- resumen para demo
-- README con demo sugerida
-
-Pendiente recomendado:
-- probar todo manualmente contra MySQL
-- si hay tiempo, agregar tests automaticos
-
-✅ Resultado:
-Proyecto preparado para entrega, demo y portfolio
+- limpiar código
+- probar todo
+- simplificar lógica
+- preparar demo
 
 ---
 
@@ -257,3 +242,4 @@ Pero siempre:
 👉 prioriza claridad sobre complejidad  
 👉 construye por fases  
 👉 prueba TODO  
+
