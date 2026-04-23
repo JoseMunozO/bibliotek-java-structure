@@ -1,29 +1,29 @@
 # Bibliotekssystem
 
-Proyecto de biblioteca en Java con:
+Ett bibliotekssystem i Java med:
 
-- arquitectura de tres capas
+- trelagersarkitektur
 - JDBC
-- DTOs y mappers
-- menús por consola
+- DTOs och mappers
+- konsolbaserade menyer
 - MySQL
 
-## Estructura
+## Struktur
 
 ```text
 Presentation -> Business -> Data -> Database
                DTO + Mapper
 ```
 
-## Requisitos
+## Krav
 
 - Java 25
-- MySQL con el esquema de [bibliotek.sql](/Users/ozeca/Downloads/bibliotek-java-structure/bibliotek.sql)
-- Variables de entorno configuradas
+- MySQL med schemat i [bibliotek.sql](/Users/ozeca/Downloads/bibliotek-java-structure/bibliotek.sql)
+- konfigurerade miljövariabler
 
-## Variables de entorno
+## Miljövariabler
 
-Usa como referencia [.env.example](/Users/ozeca/Downloads/bibliotek-java-structure/.env.example):
+Använd [.env.example](/Users/ozeca/Downloads/bibliotek-java-structure/.env.example) som referens:
 
 ```env
 DB_URL=jdbc:mysql://localhost:3306/bibliotek
@@ -31,53 +31,53 @@ DB_USER=root
 DB_PASSWORD=your_password_here
 ```
 
-## Ejecutar
+## Köra projektet
 
-Compilar:
+Kompilera:
 
 ```bash
 javac $(find src/main/java -name '*.java')
 ```
 
-Ejecutar:
+Kör:
 
 ```bash
 java -cp src/main/java se.josecarlos.bibliotek.Main
 ```
 
-## Funcionalidad actual
+## Nuvarande funktionalitet
 
-- catálogo de libros
-- búsqueda y ordenación de libros
-- detalles ampliados de libros
-- registro y gestión de miembros
-- préstamos y devoluciones
-- multas
-- menús por rol simulados
-- perfil de miembro
-- extensión de préstamos
-- registro de vencidos
-- reseñas
-- estadísticas de libros más prestados
-- notificaciones
+- bokkatalog
+- sökning och sortering av böcker
+- utökade bokdetaljer
+- registrering och hantering av medlemmar
+- lån och återlämningar
+- böter
+- rollbaserade menyer i enkel version
+- medlemsprofil
+- förlängning av lån
+- register över förfallna lån
+- recensioner
+- statistik över mest utlånade böcker
+- notifikationer
 
-## Nota sobre roles
+## Notering om roller
 
-Los roles `User`, `Librarian` y `Admin` están simulados en la capa `Presentation`.
+Rollerna `User`, `Librarian` och `Admin` är simulerade i `Presentation`-lagret.
 
-No existe login real ni autenticación persistida en base de datos.
+Det finns ingen riktig inloggning eller autentisering sparad i databasen.
 
-## Demo sugerida
+## Förslag på demo
 
-1. Mostrar libros disponibles
-2. Ordenar libros por nombre, autor e ID
-3. Registrar miembro
-4. Ver perfil de miembro
-5. Prestar libro
-6. Devolver libro
-7. Ver multas
-8. Extender préstamo
-9. Ver registro de préstamos vencidos
-10. Crear una reseña
-11. Ver estadísticas
-12. Enviar una notificación
+1. Visa tillgängliga böcker
+2. Sortera böcker efter namn, författare och ID
+3. Registrera en medlem
+4. Visa medlemsprofil
+5. Låna en bok
+6. Lämna tillbaka en bok
+7. Visa böter
+8. Förläng ett lån
+9. Visa register över förfallna lån
+10. Skapa en recension
+11. Visa statistik
+12. Skicka en notifikation

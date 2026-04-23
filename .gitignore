@@ -6,18 +6,32 @@
 *.ear
 out/
 build/
+dist/
 
 # Environment files
 .env
 .env.*
 !.env.example
 
+# IDE files
+.idea/
+*.iml
+.vscode/
+
 # OS / Finder
 .DS_Store
+Thumbs.db
 
 # Local Java crash logs
 hs_err_pid*
 replay_pid*
 
-# Project-local notes not meant for repo
-plan_trabajo_bibliotekssystem_v2.md
+# Logs and temp files
+*.log
+*.tmp
+*.temp
+
+# Markdown files not meant for main
+*.md
+!README.md
+!sammanfattning_block_demo_sv.md
