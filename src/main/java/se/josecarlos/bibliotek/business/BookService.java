@@ -3,8 +3,7 @@ package se.josecarlos.bibliotek.business;
 import se.josecarlos.bibliotek.data.BookDAO;
 import se.josecarlos.bibliotek.dto.BookDTO;
 import se.josecarlos.bibliotek.dto.BookDetailsDTO;
-import se.josecarlos.bibliotek.mapper.BookMapper;
-import se.josecarlos.bibliotek.model.Book;
+import se.josecarlos.bibliotek.dto.BookStatisticsDTO;
 
 import java.util.Comparator;
 import java.util.List;
@@ -18,34 +17,59 @@ public class BookService {
     }
 
     public List<BookDTO> getAllBooks() {
-        return bookDAO.getAllBooks().stream()
-                .map(BookMapper::toBookDTO)
+        return bookDAO.getCatalogBooks().stream()
                 .sorted(Comparator.comparing(BookDTO::getTitle))
                 .toList();
     }
 
     public List<BookDTO> getAvailableBooks() {
-        return bookDAO.getAllBooks().stream()
+        return bookDAO.getCatalogBooks().stream()
                 .filter(book -> book.getAvailableCopies() > 0)
-                .map(BookMapper::toBookDTO)
                 .sorted(Comparator.comparing(BookDTO::getTitle))
                 .toList();
     }
 
     public List<BookDTO> searchBooks(String keyword) {
-        return bookDAO.searchBooksByTitle(keyword).stream()
-                .map(BookMapper::toBookDTO)
+        String normalizedKeyword = keyword == null ? "" : keyword.trim();
+
+        if (normalizedKeyword.isEmpty()) {
+            return List.of();
+        }
+
+        return bookDAO.getCatalogBooks().stream()
+                .filter(book -> book.getTitle().toLowerCase().contains(normalizedKeyword.toLowerCase()))
                 .sorted(Comparator.comparing(BookDTO::getTitle))
                 .toList();
     }
 
-    public BookDetailsDTO getBookDetails(int id) {
-        Book book = bookDAO.getBookById(id);
+    public List<BookDTO> getBooksSortedBy(String sortBy) {
+        Comparator<BookDTO> comparator = switch (sortBy == null ? "" : sortBy.trim().toLowerCase()) {
+            case "id" -> Comparator.comparingInt(BookDTO::getId);
+            case "author" -> Comparator.comparing((BookDTO book) -> normalizeSortValue(book.getAuthors()))
+                    .thenComparing(BookDTO::getTitle);
+            case "name", "title" -> Comparator.comparing((BookDTO book) -> normalizeSortValue(book.getTitle()));
+            default -> Comparator.comparing((BookDTO book) -> normalizeSortValue(book.getTitle()));
+        };
 
-        if (book == null) {
+        return bookDAO.getCatalogBooks().stream()
+                .sorted(comparator)
+                .toList();
+    }
+
+    public BookDetailsDTO getBookDetails(int id) {
+        if (id <= 0) {
             return null;
         }
 
-        return BookMapper.toBookDetailsDTO(book);
+        return bookDAO.getBookDetails(id);
+    }
+
+    public List<BookStatisticsDTO> getMostBorrowedBooks(int limit) {
+        int normalizedLimit = limit <= 0 ? 10 : limit;
+        return bookDAO.getMostBorrowedBooks(normalizedLimit);
+    }
+
+    private String normalizeSortValue(String value) {
+        return value == null ? "" : value.trim().toLowerCase();
     }
 }

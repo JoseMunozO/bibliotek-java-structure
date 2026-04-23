@@ -10,7 +10,8 @@ public class BookMapper {
         return new BookDTO(
                 book.getId(),
                 book.getTitle(),
-                book.getAvailableCopies()
+                book.getAvailableCopies(),
+                ""
         );
     }
 
@@ -21,7 +22,12 @@ public class BookMapper {
                 book.getIsbn(),
                 book.getYearPublished(),
                 book.getTotalCopies(),
-                book.getAvailableCopies()
+                book.getAvailableCopies(),
+                null,
+                null,
+                null,
+                "",
+                ""
         );
     }
 }

@@ -11,7 +11,9 @@ public class MemberMapper {
         return new MemberDTO(
                 member.getId(),
                 fullName,
-                member.getEmail()
+                member.getEmail(),
+                member.getMembershipType(),
+                member.getStatus()
         );
     }
 }
